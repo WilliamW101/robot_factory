@@ -1,0 +1,22 @@
+<h1> Parts For Robot <%= @robot.name %> </h1>
+<hr />
+
+<% if @parts.any? %>
+  <ul class="collapsible" data-collapsible="accordion">
+    <% @parts.each do |part| %>
+      <li>
+        <div class="collapsible-header"><%= part.name %></div>
+        <div class="collapsible-body">
+          <p>Part: <%= part.number %></p>
+           <%= link_to 'Edit', edit_robot_part_path(@robot, part), class: 'btn teal darken-3' %>
+           <%= link_to 'Delete', robot_part_path(@robot, part), class: 'btn red accent-4',
+            method: :delete, data: {confirm: 'Really Delete?'} %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <h3> No Parts Found, Please Create One! </h3>
+<% end %>
+
+<%= link_to 'New Part', new_robot_part_path(@robot), class: 'btn teal darken-3' %>

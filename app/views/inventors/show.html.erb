@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col s12 center">
+    <div class="card teal">
+      <div class="card-content white-text">
+        <span class="card-title"> Inventor: <%= @inventor.name %> </span>
+        <p>Age: <%= @inventor.age %></p>
+        <p>Hire Date: <%= @inventor.hire_date.strftime('%B %e, %Y') %></p>
+        <p>Specialty: <%= @inventor.speciality.titleize %></p>
+        <p>Number of Robots: <%= @robots.count %></p>
+      </div>
+      <div class="card-action">
+        <%= link_to 'Edit', edit_inventor_path(@inventor), class: 'teal-text text-lighten-5' %>
+        <%= link_to 'Delete', inventor_path(@inventor), class: 'teal-text text-lighten-5', method: :delete,
+          data: {confirm: 'Really Delete?'} %>
+      </div>
+    </div>
+    <% if @robots.any? %>
+      <h5> All Robots </h4>
+        <div class="row">
+        <% @robots.each do |robot| %>
+        <div class="col s12 m6 l4">
+          <div class="card teal">
+            <div class="card-content white-text">
+              <span class="card-title"> <%= robot.name %> </span>
+              <p> Industry: <%= robot.industry %> </p>
+            </div>
+            <div class="card-action">
+              <%= link_to 'Show', inventor_robot_path(@inventor, robot), class: 'teal-text text-lighten-5' %>
+              <%= link_to 'Edit', edit_inventor_robot_path(@inventor, robot), class: 'teal-text text-lighten-5' %>
+              <%= link_to 'Delete', inventor_robot_path(@inventor, robot), class: 'teal-text text-lighten-5', method: :delete,
+                data: {confirm: 'Really Delete?'} %>
+            </div>
+          </div>
+        </div>
+    <% end %>
+  </div>
+  <% end %>
+      <%= link_to 'New Robot', new_inventor_robot_path(@inventor), class: 'btn teal darken-3' %>
+  </div>
+</div>
